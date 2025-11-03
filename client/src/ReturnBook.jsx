@@ -12,7 +12,7 @@ const ReturnBook = () => {
     const fetchBorrowed = async () => {
       try {
         setDataLoading(true);
-        const res = await axios.get("http://localhost:5000/api/borrow/history");
+        const res = await axios.get("https://library-system-production-8209.up.railway.app/api/borrow/history");
         const onlyBorrowed = res.data.filter((r) => r.status === "borrowed");
         setBorrowed(onlyBorrowed);
       } catch (err) {
@@ -36,12 +36,12 @@ const ReturnBook = () => {
     setMessage("");
 
     try {
-      await axios.put("http://localhost:5000/api/borrow/return", { recordId });
+      await axios.put("https://library-system-production-8209.up.railway.app/api/borrow/return", { recordId });
       setMessage("✅ Book successfully returned to library!");
       setRecordId("");
       
       // Refresh the borrowed list
-      const res = await axios.get("http://localhost:5000/api/borrow/history");
+      const res = await axios.get("https://library-system-production-8209.up.railway.app/api/borrow/history");
       const onlyBorrowed = res.data.filter((r) => r.status === "borrowed");
       setBorrowed(onlyBorrowed);
     } catch (err) {

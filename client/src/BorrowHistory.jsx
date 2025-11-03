@@ -10,7 +10,7 @@ const BorrowHistory = () => {
     const fetchRecords = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/borrow");
+        const res = await axios.get("https://library-system-production-8209.up.railway.app/api/borrow");
         setRecords(res.data);
       } catch (err) {
         console.error("Error fetching borrow history:", err);
