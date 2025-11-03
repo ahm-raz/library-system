@@ -23,7 +23,7 @@ const AddUser = () => {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:5000/api/users/register", form);
+      await axios.post("https://library-system-production-8209.up.railway.app/api/users/register", form);
       setForm({ name: "", email: "", password: "", role: "member" });
       setMessage("✅ User added successfully!");
       if (showUsers) fetchUsers(); // Refresh users list if visible
@@ -37,7 +37,7 @@ const AddUser = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users");
+      const res = await axios.get("https://library-system-production-8209.up.railway.app/api/users");
       setUsers(res.data);
       setShowUsers(true);
       setMessage(""); // Clear any previous messages

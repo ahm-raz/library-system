@@ -21,7 +21,7 @@ const AddBook = ({ onBookAdded }) => {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:5000/api/books", form);
+      await axios.post("https://library-system-production-8209.up.railway.app/api/books", form);
       setForm({ title: "", author: "", image: "" });
       setMessage("✅ Book added successfully!");
       onBookAdded(); // refresh book list

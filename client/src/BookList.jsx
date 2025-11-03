@@ -12,8 +12,8 @@ const BookList = () => {
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const resFetch = await axios.get("http://localhost:5000/api/books/fetch");
-      const resDB = await axios.get("http://localhost:5000/api/books");
+      const resFetch = await axios.get("https://library-system-production-8209.up.railway.app/api/books/fetch");
+      const resDB = await axios.get("https://library-system-production-8209.up.railway.app/api/books");
       const allBooks = [...resDB.data, ...resFetch.data];
       const booksWithId = allBooks.map((b, idx) => ({ _id: b._id || idx, ...b }));
       setBooks(booksWithId);
@@ -32,7 +32,7 @@ const BookList = () => {
     if (!user) return alert("Please login first to borrow books");
     setLoadingId(bookId);
     try {
-      await axios.post("http://localhost:5000/api/borrow", { userId: user._id, bookId });
+      await axios.post("https://library-system-production-8209.up.railway.app/api/borrow", { userId: user._id, bookId });
       fetchBooks();
     } catch (err) {
       console.error("Borrow failed:", err);
@@ -45,12 +45,12 @@ const BookList = () => {
   const handleReturn = async (bookId) => {
     setLoadingId(bookId);
     try {
-      const res = await axios.get("http://localhost:5000/api/borrow");
+      const res = await axios.get("https://library-system-production-8209.up.railway.app/api/borrow");
       const record = res.data.find(
         (r) => (r.book?._id || r.book) === bookId && r.status === "borrowed"
       );
       if (!record) return alert("No active borrow record found");
-      await axios.put("http://localhost:5000/api/borrow/return", { recordId: record._id });
+      await axios.put("https://library-system-production-8209.up.railway.app/api/borrow/return", { recordId: record._id });
       fetchBooks();
     } catch (err) {
       console.error("Return failed:", err);

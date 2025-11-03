@@ -15,8 +15,8 @@ const BorrowBook = () => {
       try {
         setDataLoading(true);
         const [userRes, bookRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/users"),
-          axios.get("http://localhost:5000/api/books"),
+          axios.get("https://library-system-production-8209.up.railway.app/api/users"),
+          axios.get("https://library-system-production-8209.up.railway.app/api/books"),
         ]);
         setUsers(userRes.data);
         setBooks(bookRes.data.filter(book => book.available));
@@ -41,13 +41,13 @@ const BorrowBook = () => {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:5000/api/borrow", { userId, bookId });
+      await axios.post("https://library-system-production-8209.up.railway.app/api/borrow", { userId, bookId });
       setMessage("✅ Book borrowed successfully!");
       setUserId("");
       setBookId("");
       
       // Refresh available books
-      const bookRes = await axios.get("http://localhost:5000/api/books");
+      const bookRes = await axios.get("https://library-system-production-8209.up.railway.app/api/books");
       setBooks(bookRes.data.filter(book => book.available));
     } catch (err) {
       console.error(err);
